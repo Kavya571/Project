@@ -1,4 +1,4 @@
-package com.cg.onlinepizza.coupan.controller;
+package com.cg.onlinepizza.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.onlinepizza.coupan.dto.Coupan;
-import com.cg.onlinepizza.coupan.service.ICoupanService;
+import com.cg.onlinepizza.dto.Coupan;
 import com.cg.onlinepizza.exceptions.CoupanIdNotFoundException;
 import com.cg.onlinepizza.exceptions.InvalidCoupanOperationException;
+import com.cg.onlinepizza.service.ICoupanService;
 @RestController
 public class CoupanController {
 	@Autowired

@@ -1,4 +1,4 @@
-package com.cg.onlinepizza.pizza.dto;
+package com.cg.onlinepizza.dto;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.cg.onlinepizza.order.dto.PizzaOrder;
 
 @Entity(name="Pizza")
 

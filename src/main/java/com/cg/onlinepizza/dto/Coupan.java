@@ -1,5 +1,5 @@
 
-package com.cg.onlinepizza.coupan.dto;
+package com.cg.onlinepizza.dto;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.cg.onlinepizza.order.dto.PizzaOrder;
 
 @Entity
 public class Coupan {
@@ -26,23 +24,6 @@ public class Coupan {
 	private String coupanDescription;
 	@Column
 	private int coupanPizzaId;
-	
-//	@OneToOne//(mappedBy = "coupan1")
-//	private PizzaOrder pizzaorder;
-//	
-////	@OneToOne(cascade= CascadeType.ALL)
-////   // @JoinColumn(name="bookingOrderId",referencedColumnName="bookingOrderId")
-////	private PizzaOrder pizzaorder;
-	
-
-//	
-//	public PizzaOrder getPizzaorder() {
-//		return pizzaorder;
-//	}
-//
-//	public void setPizzaorder(PizzaOrder pizzaorder) {
-//		this.pizzaorder = pizzaorder;
-//	}
 
 	public Coupan(int coupanId, String coupanName, String coupanType, String coupanDescription, int coupanPizzaId//,PizzaOrder pizzaorder
 			) {

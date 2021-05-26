@@ -1,9 +1,9 @@
-package com.cg.onlinepizza.coupan.dao;
+package com.cg.onlinepizza.repository;
 
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.cg.onlinepizza.coupan.dto.Coupan;
+import com.cg.onlinepizza.dto.Coupan;
 
 
 public interface ICoupanRepository extends CrudRepository<Coupan,Integer> {

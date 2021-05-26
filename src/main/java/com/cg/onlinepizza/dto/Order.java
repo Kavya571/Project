@@ -1,42 +1,40 @@
-package com.cg.onlinepizza.order.dto;
+package com.cg.onlinepizza.dto;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "Orders")
 public class Order {
 	@Id
-	@Column
 	private int orderId;
-	@Column
 	private String orderType;
-	@Column
-	private String orderDescription;
-	@Column
+	private String orderDesc;
+	
 	private int customerId;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="bookingOrderId")
+//	@ManyToOne(cascade=CascadeType.ALL)
+//	@JoinColumn(name="bookingOrderId")
+//	private PizzaOrder pizzaorder;
+
+	@OneToOne(cascade= CascadeType.ALL)
 	private PizzaOrder pizzaorder;
 	
+	public Order() {
+		super();
+	}
 
-	public Order(int orderId, String orderType, String orderDescription, int customerId
-			) {
+	public Order(int orderId, String orderType, String orderDesc, int customerId) {
 		super();
 		this.orderId = orderId;
 		this.orderType = orderType;
-		this.orderDescription = orderDescription;
+		this.orderDesc = orderDesc;
 		this.customerId = customerId;
-		
-	}
-
-	public Order() {
-		super();
 	}
 
 	public int getOrderId() {
@@ -55,14 +53,7 @@ public class Order {
 		this.orderType = orderType;
 	}
 
-	public String getOrderDescription() {
-		return orderDescription;
-	}
-
-	public void setOrderDescription(String orderDescription) {
-		this.orderDescription = orderDescription;
-	}
-
+	
 	public int getCustomerId() {
 		return customerId;
 	}
@@ -79,7 +70,15 @@ public class Order {
 		this.pizzaorder = pizzaorder;
 	}
 
+	public String getOrderDesc() {
+		return orderDesc;
+	}
 
+	public void setOrderDesc(String orderDesc) {
+		this.orderDesc = orderDesc;
+	}
+
+	
 }
 
 

@@ -1,4 +1,4 @@
-package com.cg.onlinepizza.order.service;
+package com.cg.onlinepizza.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.onlinepizza.dto.PizzaOrder;
 import com.cg.onlinepizza.exceptions.InvalidSizeException;
 import com.cg.onlinepizza.exceptions.OrderIdNotFoundException;
-import com.cg.onlinepizza.order.dao.IPizzaOrderRepository;
-import com.cg.onlinepizza.order.dto.PizzaOrder;
+import com.cg.onlinepizza.repository.IPizzaOrderRepository;
 
 
 @Service

@@ -1,4 +1,4 @@
-package com.cg.onlinepizza.pizza.controller;
+package com.cg.onlinepizza.controller;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.onlinepizza.dto.Pizza;
 import com.cg.onlinepizza.exceptions.InvalidMinCostException;
 import com.cg.onlinepizza.exceptions.PizzaIdNotFoundException;
-import com.cg.onlinepizza.pizza.dto.Pizza;
-import com.cg.onlinepizza.pizza.service.IPizzaService;
+import com.cg.onlinepizza.service.IPizzaService;
 
 @RestController
 public class PizzaController {

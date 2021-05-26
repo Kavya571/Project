@@ -1,14 +1,15 @@
-package com.cg.onlinepizza.pizza.service;
+package com.cg.onlinepizza.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.cg.onlinepizza.pizza.dao.IPizzaRepository;
+
+import com.cg.onlinepizza.dto.Pizza;
 import com.cg.onlinepizza.exceptions.InvalidMinCostException;
 import com.cg.onlinepizza.exceptions.PizzaIdNotFoundException;
-import com.cg.onlinepizza.pizza.dto.Pizza;
+import com.cg.onlinepizza.repository.IPizzaRepository;
 @Service
 public class IPizzaService {
 	@Autowired

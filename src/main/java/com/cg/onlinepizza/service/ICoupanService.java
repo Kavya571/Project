@@ -1,14 +1,14 @@
-package com.cg.onlinepizza.coupan.service;
+package com.cg.onlinepizza.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.onlinepizza.coupan.dto.Coupan;
 import com.cg.onlinepizza.exceptions.CoupanIdNotFoundException;
 import com.cg.onlinepizza.exceptions.InvalidCoupanOperationException;
-import com.cg.onlinepizza.coupan.dao.ICoupanRepository;
+import com.cg.onlinepizza.repository.ICoupanRepository;
+import com.cg.onlinepizza.dto.Coupan;
 
 @Service
 public class ICoupanService {

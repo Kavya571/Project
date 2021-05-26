@@ -1,4 +1,4 @@
-package com.cg.onlinepizza.customer.dto;
+package com.cg.onlinepizza.dto;
 
 public class Customer {
 	private int customerId;
