@@ -1,7 +1,6 @@
 package com.cg.onlinepizza.order.dao;
 
 
-
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -13,10 +12,8 @@ import com.cg.onlinepizza.order.dto.PizzaOrder;
 
 
 public interface IPizzaOrderRepository extends CrudRepository<PizzaOrder, Integer> {
-	@Query(value="select * from pizzaoder where size=:size and quantity=: quantity", nativeQuery = true)
-	List<PizzaOrder> caluculateTotal(@Param("size")String size,@Param("quantity") int quantity) throws InvalidSizeException;
-	
-
-
+//	@Query(value="select * from pizzaoder where size=:size and quantity=: quantity", nativeQuery = true)
+//	List<PizzaOrder> caluculateTotal(@Param("size")String size,@Param("quantity") int quantity) throws InvalidSizeException;
+//	
 }
 

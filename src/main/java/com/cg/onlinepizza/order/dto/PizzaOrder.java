@@ -1,19 +1,27 @@
 package com.cg.onlinepizza.order.dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.cg.onlinepizza.coupan.dto.Coupan;
 import com.cg.onlinepizza.pizza.dto.Pizza;
 
+
 @Entity
-@Table
 public class PizzaOrder {
 	@Id
+	@GeneratedValue
 	@Column
 	private int bookingOrderId;
 	@Column
@@ -26,12 +34,16 @@ public class PizzaOrder {
 	private String size;//medium,regular,large
 	@Column
 	private double totalCost;
-	@Column
-	private Pizza pizza;
-	@Column
-	private Order order;
-	@Column
+//	@Column
+//	private Pizza pizza;
+//	@Column
+//	private Order order;
+
+	
+	@OneToOne(cascade= CascadeType.ALL)
+	@JoinTable(name = "pizzaorder_coupan_mapping", joinColumns = {@JoinColumn(name = "bookingOrderId")}, inverseJoinColumns = {@JoinColumn(name = "coupan_Id")})
 	private Coupan coupan;
+
 	
 	public int getBookingOrderId() {
 		return bookingOrderId;
@@ -69,18 +81,18 @@ public class PizzaOrder {
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}
-	public Pizza getPizza() {
-		return pizza;
-	}
-	public void setPizza(Pizza pizza) {
-		this.pizza = pizza;
-	}
-	public Order getOrder() {
-		return order;
-	}
-	public void setOrder(Order order) {
-		this.order = order;
-	}
+//	public Pizza getPizza() {
+//		return pizza;
+//	}
+//	public void setPizza(Pizza pizza) {
+//		this.pizza = pizza;
+//	}
+//	public Order getOrder() {
+//		return order;
+//	}
+//	public void setOrder(Order order) {
+//		this.order = order;
+//	}
 	public Coupan getCoupan() {
 		return coupan;
 	}

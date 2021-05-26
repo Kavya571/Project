@@ -15,18 +15,23 @@ import com.cg.onlinepizza.exceptions.OrderIdNotFoundException;
 import com.cg.onlinepizza.order.dto.PizzaOrder;
 import com.cg.onlinepizza.order.service.IPizzaOrderService;
 
+
 @RestController
 public class PizzaOrderController {
 	@Autowired
 	IPizzaOrderService ipo;
+	@GetMapping("/viewOrders")
+	private List<PizzaOrder> viewOrdersList() {
+		return ipo.viewOrdersList();
+	}
 
 	@GetMapping("/viewPizzaOrder/{id}")
 	private PizzaOrder viewPizzaOrderList(@PathVariable("id") int orderId) throws OrderIdNotFoundException {
 		return ipo.viewPizzaOrder(orderId);
 	}
 	
-	@DeleteMapping("/pizzaorder/{orderId}")
-	private void cancelPizzaOrder(@PathVariable("orderId") int orderid) throws OrderIdNotFoundException {
+	@DeleteMapping("/pizzaorder/{bookingOrderId}")
+	private void cancelPizzaOrder(@PathVariable("bookingOrderId") int orderid) throws OrderIdNotFoundException {
 		ipo.cancelPizzaOrder(orderid);
 	}
 
@@ -35,8 +40,9 @@ public class PizzaOrderController {
 		ipo.bookPizzaOrder(order);
 		return order.getBookingOrderId();
 	}
+	
 
-	@PutMapping("/update")
+	@PutMapping("/updateorder")
 	private PizzaOrder updatePizzaOrder(@RequestBody PizzaOrder order) {
 		ipo.updatePizzaOrder(order);
 		return order;

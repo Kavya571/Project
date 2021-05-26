@@ -1,12 +1,15 @@
 package com.cg.onlinepizza.order.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.onlinepizza.exceptions.InvalidSizeException;
 import com.cg.onlinepizza.exceptions.OrderIdNotFoundException;
 import com.cg.onlinepizza.order.dao.IPizzaOrderRepository;
 import com.cg.onlinepizza.order.dto.PizzaOrder;
-
 
 
 @Service
@@ -37,10 +40,17 @@ public class IPizzaOrderService {
 			throw new OrderIdNotFoundException("Order Id not present in table");
 		}
 	}
+	
+	public List<PizzaOrder> viewOrdersList(){
+		List<PizzaOrder> pizzaorder = new ArrayList<PizzaOrder>();
+		IPizzaOrderRepository.findAll().forEach(pizzaorder1 -> pizzaorder.add(pizzaorder1));
+		return pizzaorder;
+	}
 
-//	List<PizzaOrder> caluculateTotal(String size, int quantity) throws InvalidSizeException{
+//	public List<PizzaOrder> caluculateTotal(String size, int quantity) throws InvalidSizeException{
+//		List<PizzaOrder> pizzaList= caluculateTotal(size,quantity);
+//		return pizzaList;
 //		
-//		return null;
-//		
-//	};
+//	}
+	
 }
