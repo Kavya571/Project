@@ -17,12 +17,12 @@ public class IPizzaOrderService {
 	@Autowired
 	IPizzaOrderRepository IPizzaOrderRepository;
 	
-	public PizzaOrder bookPizzaOrder(PizzaOrder order) {
-		return IPizzaOrderRepository.save(order);
+	public PizzaOrder bookPizzaOrder(PizzaOrder orders) {
+		return IPizzaOrderRepository.save(orders);
 	}
 
-	public PizzaOrder updatePizzaOrder(PizzaOrder order) {
-		return IPizzaOrderRepository.save(order);
+	public PizzaOrder updatePizzaOrder(PizzaOrder orders) {
+		return IPizzaOrderRepository.save(orders);
 	}
 
 	public void cancelPizzaOrder(int orderId) throws OrderIdNotFoundException{

@@ -30,6 +30,18 @@ public class PizzaOrder {
 	// {@JoinColumn(name = "bookingOrderId")}, inverseJoinColumns =
 	// {@JoinColumn(name = "coupan_Id")})
 	private Coupan coupan;
+	
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private Pizza pizza;
+
+	public Pizza getPizza() {
+		return pizza;
+	}
+
+	public void setPizza(Pizza pizza) {
+		this.pizza = pizza;
+	}
 
 	public int getBookingId() {
 		return bookingId;

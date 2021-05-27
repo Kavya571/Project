@@ -35,17 +35,17 @@ public class PizzaOrderController {
 		ipo.cancelPizzaOrder(orderid);
 	}
 
-	@PostMapping("/order")
-	private int saveOrder(@RequestBody PizzaOrder order) {
-		ipo.bookPizzaOrder(order);
-		return order.getBookingId();
+	@PostMapping("/orders")
+	private int saveOrder(@RequestBody PizzaOrder orders) {
+		ipo.bookPizzaOrder(orders);
+		return orders.getBookingId();
 	}
 	
 
 	@PutMapping("/updateorder")
-	private PizzaOrder updatePizzaOrder(@RequestBody PizzaOrder order) {
-		ipo.updatePizzaOrder(order);
-		return order;
+	private PizzaOrder updatePizzaOrder(@RequestBody PizzaOrder orders) {
+		ipo.updatePizzaOrder(orders);
+		return orders;
 	}
 	
 	

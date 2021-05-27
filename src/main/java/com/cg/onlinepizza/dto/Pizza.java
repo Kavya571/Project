@@ -27,17 +27,18 @@ public class Pizza {
 	private double pizzaCost;
 	@Column
 	private double pizzaCostAfterCoupan;
-
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "bookingOrderId")
-	private PizzaOrder pizzaorder;
 	
-	public PizzaOrder getPizzaorder() {
-		return pizzaorder;
-	}
-	public void setPizzaorder(PizzaOrder pizzaorder) {
-		this.pizzaorder = pizzaorder;
-	}
+
+//	@ManyToOne(cascade=CascadeType.ALL)
+//	@JoinColumn(name = "bookingOrderId")
+//	private PizzaOrder pizzaorder;
+//	
+//	public PizzaOrder getPizzaorder() {
+//		return pizzaorder;
+//	}
+//	public void setPizzaorder(PizzaOrder pizzaorder) {
+//		this.pizzaorder = pizzaorder;
+//	}
 	public int getPizzaId() {
 		return pizzaId;
 	}
@@ -45,7 +46,8 @@ public class Pizza {
 		super();
 	}
 	public Pizza(int pizzaId, String pizzaType, String pizzaName, String pizzaDescription, double pizzaCost,
-			double pizzaCostAfterCoupan, PizzaOrder pizzaorder) {
+			double pizzaCostAfterCoupan//, PizzaOrder pizzaorder
+			) {
 		super();
 		this.pizzaId = pizzaId;
 		this.pizzaType = pizzaType;
@@ -53,7 +55,7 @@ public class Pizza {
 		this.pizzaDescription = pizzaDescription;
 		this.pizzaCost = pizzaCost;
 		this.pizzaCostAfterCoupan = pizzaCostAfterCoupan;
-		this.pizzaorder = pizzaorder;
+	//	this.pizzaorder = pizzaorder;
 	}
 	public void setPizzaId(int pizzaId) {
 		this.pizzaId = pizzaId;
