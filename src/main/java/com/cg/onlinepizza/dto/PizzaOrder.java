@@ -26,22 +26,19 @@ public class PizzaOrder {
 	private double totalCost;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	// @JoinTable(name = "pizzaorder_coupan_mapping", joinColumns =
-	// {@JoinColumn(name = "bookingOrderId")}, inverseJoinColumns =
-	// {@JoinColumn(name = "coupan_Id")})
 	private Coupan coupan;
 	
 
-	@OneToOne(cascade = CascadeType.ALL)
-	private Pizza pizza;
-
-	public Pizza getPizza() {
-		return pizza;
-	}
-
-	public void setPizza(Pizza pizza) {
-		this.pizza = pizza;
-	}
+//	@OneToOne(cascade = CascadeType.ALL)
+//	private Pizza pizza;
+//
+//	public Pizza getPizza() {
+//		return pizza;
+//	}
+//
+//	public void setPizza(Pizza pizza) {
+//		this.pizza = pizza;
+//	}
 
 	public int getBookingId() {
 		return bookingId;
