@@ -34,7 +34,7 @@ public class CoupanTest extends OnlinePizzaOrderApplicationTests {
 
 	@Test
 	void testEditCoupans() throws InvalidCoupanOperationException {
-		Coupan cou = new Coupan(1,"ExtraFifty","Buy1 & Get1","Reduces50% of bill",5);
+		Coupan cou = new Coupan(4,"ExtraFifty","Buy1 & Get1","Reduces50% of bill",5);
 		cou = service.editCoupans(cou);
 		assertEquals(cou.getCoupanType(), "Buy1 & Get1");
 }
@@ -47,8 +47,8 @@ public class CoupanTest extends OnlinePizzaOrderApplicationTests {
 	@Test
 	void testDeleteCoupans() throws CoupanIdNotFoundException {
 		
-		int id =service.deleteCoupans(20);
-		assertEquals(id, 20);
+		int id =service.deleteCoupans(4);
+		assertEquals(id, 4);
 	}
 
 
