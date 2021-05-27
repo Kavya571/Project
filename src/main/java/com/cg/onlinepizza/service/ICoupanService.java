@@ -21,7 +21,11 @@ public class ICoupanService {
 
 	public Coupan editCoupans(Coupan coupan)throws InvalidCoupanOperationException{
 		try {
+			if(ICoupanRepository.existsById(coupan.getCoupanId())) {
 			return ICoupanRepository.save(coupan);
+			}else {
+				throw new InvalidCoupanOperationException();
+			}
 		}catch(Exception e) {
 			throw new InvalidCoupanOperationException("Operation is not valid");
 		}
