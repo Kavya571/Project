@@ -1,0 +1,55 @@
+package com.cg.onlinepizza.test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.cg.onlinepizza.dto.Coupan;
+import com.cg.onlinepizza.service.ICoupanService;
+import com.cg.onlinepizza.test.OnlinePizzaOrderApplicationTests;
+import com.cg.onlinepizza.exceptions.CoupanIdNotFoundException;
+import com.cg.onlinepizza.exceptions.InvalidCoupanOperationException;
+
+public class CoupanTest extends OnlinePizzaOrderApplicationTests {
+	@Autowired
+	ICoupanService service;
+
+
+	@Test
+	void testICoupanService() {
+	    assertTrue(service instanceof ICoupanService);
+	}
+
+    @Test
+	void testAddCoupans() {
+		Coupan cou = new Coupan(4,"ExtraFifty","Discount","Reduces50% of bill",4);
+		cou = service.addCoupans(cou);
+		assertEquals(cou.getCoupanName(), "ExtraFifty");
+	}
+
+	@Test
+	void testEditCoupans() throws InvalidCoupanOperationException {
+		Coupan cou = new Coupan(1,"ExtraFifty","Buy1 & Get1","Reduces50% of bill",5);
+		cou = service.editCoupans(cou);
+		assertEquals(cou.getCoupanType(), "Buy1 & Get1");
+}
+
+	@Test
+	void testViewCoupans() {
+		List<Coupan> coup = service.viewCoupans();
+		assertThat(coup).size().isGreaterThan(0);
+	}
+	@Test
+	void testDeleteCoupans() throws CoupanIdNotFoundException {
+		
+		int id =service.deleteCoupans(20);
+		assertEquals(id, 20);
+	}
+
+
+}
