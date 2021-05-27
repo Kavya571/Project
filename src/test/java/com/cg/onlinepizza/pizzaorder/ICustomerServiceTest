@@ -1,0 +1,61 @@
+package com.cg.onlinepizza.customer.test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+import com.cg.onlinepizza.dto.*;
+import com.cg.onlinepizza.dto.Customer;
+import com.cg.onlinepizza.exceptions.CustomerIdNotFoundException;
+import com.cg.onlinepizza.service.ICustomerService;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+public class ICustomerServiceTest extends OnlinePizzaOrderApplicationTests {
+	@Autowired
+	ICustomerService service;
+
+	@Test
+	void testICustomerService() {
+		assertTrue(service instanceof ICustomerService);
+	}
+
+	@Test
+	public void testAddCustomer() {
+		Customer cus = new Customer(1,"Anu",891889065,"anu@gmail.com","Tirupati","anu","anu123");
+		cus = service.addCustomer(cus);
+		assertEquals(cus.getCustomerId(),1);
+	}
+
+	@Test
+	void testUpdateCustomer() {
+		Customer cus = new Customer(1,"Anu",891889065,"anu@gmail.com","Tirupati","anu","anu123");
+		cus = service.updateCustomer(cus);
+		assertEquals(cus.getCustomerAddress(), "Tirupati"); 
+	}
+
+  @Test
+	void testDeleteCustomer() throws CustomerIdNotFoundException{
+		
+		int id = service.deleteCustomer(1);
+		assertEquals(id,1);
+	}
+
+	@Test
+	void testViewCustomer() throws CustomerIdNotFoundException {
+		
+		Customer docs = service.viewCustomer1(124);
+		assertEquals(docs.getCustomerId(), 124);
+		
+	}
+
+	@Test
+	void testViewCustomers() {
+		List<Customer> cust = service.viewCustomers();
+		assertNotNull(cust);
+	}
+
+}
