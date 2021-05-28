@@ -1,5 +1,6 @@
 package com.cg.onlinepizza.service;
 
+import java.lang.StackWalker.Option;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.cg.onlinepizza.repository.IUserRepository;
 import com.cg.onlinepizza.dto.User;
-import com.cg.onlinepizza.exceptions.InvalidCoupanOperationException;
 import com.cg.onlinepizza.exceptions.UserNotFoundException;
 
 @Service
@@ -29,15 +29,21 @@ public class IUserService {
 		}
 	}
 
-	public String signOut(User user) {
-		System.out.println(user.getUserId()+" "+user.isLoggedIn()+" "+iur.existsById(user.getUserId()));
-		if (iur.existsById(user.getUserId()) && user.isLoggedIn() == true) {
-			iur.setLoggedIn(false,user.getUserId());
-			user.setLoggedIn(false);
-			return "success";
-		}else {
-			return "failure"; 
+	public String signOut(User user) {		
+		Optional<User> u= iur.findById(user.getUserId());
+		if(u.isPresent()) {
+			User obj= u.get();
+			if(obj.isLoggedIn()==true) {
+				obj.setLoggedIn(false);
+				iur.save(obj);
+				return "success";
+			}
+			else {
+				return "failure";
+			}
 		}
+		return "failure";
+		
 	}
 
 	public boolean forgotPassword(int id, String oldPassword, String newPassword) throws UserNotFoundException {
