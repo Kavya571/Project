@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cg.onlinepizza.exceptions.CoupanIdNotFoundException;
 import com.cg.onlinepizza.exceptions.InvalidCoupanOperationException;
-import com.cg.onlinepizza.repository.ICoupanRepository;
+import com.cg.onlinepizza.dao.ICoupanRepository;
 import com.cg.onlinepizza.dto.Coupan;
 
 @Service
@@ -16,8 +16,10 @@ public class ICoupanService {
     ICoupanRepository ICoupanRepository;
     
 	public Coupan addCoupans(Coupan coupan) {
-		return ICoupanRepository.save(coupan);
-	}
+		
+		    return ICoupanRepository.save(coupan);
+			
+	};
 
 	public Coupan editCoupans(Coupan coupan)throws InvalidCoupanOperationException{
 		try {
@@ -31,9 +33,10 @@ public class ICoupanService {
 		}
 	}
 
-	public void deleteCoupans(int coupanId)throws CoupanIdNotFoundException{
+	public int deleteCoupans(int coupanId)throws CoupanIdNotFoundException{
 		try {
 		ICoupanRepository.deleteById(coupanId);
+		return coupanId;
 		}catch(Exception e) {
 			throw new CoupanIdNotFoundException("Coupan not found");
 		}
