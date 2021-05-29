@@ -21,8 +21,8 @@ public class IUserService {
 
 	public String signin(User user) throws UserNotFoundException {
 		if (iur.existsById(user.getUserId()) && user.isLoggedIn() == false) {
-			iur.setLoggedIn(true,user.getUserId());
 			user.setLoggedIn(true);
+			iur.save(user);
 			return "success";
 		}else {
 			return "failure"; 
