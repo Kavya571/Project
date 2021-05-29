@@ -11,11 +11,6 @@ import com.cg.onlinepizza.dto.User;
 public interface IUserRepository extends CrudRepository<User, Integer> {
 	@Transactional 
 	@Modifying
-    @Query(value="update user set logged_in=:b where user_id=:userId",nativeQuery=true)
-	void setLoggedIn(@Param("b")boolean b, @Param("userId")int userId);
-	
-	@Transactional 
-	@Modifying
 	@Query(value="update user set password=:newPassword where password=:oldPassword and user_id=:id", nativeQuery=true )
    void replace( @Param("id")int id,@Param("oldPassword")String oldPassword,@Param("newPassword")String newPassword);
    
