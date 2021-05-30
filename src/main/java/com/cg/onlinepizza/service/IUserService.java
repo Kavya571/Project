@@ -25,7 +25,7 @@ public class IUserService {
 		if (!user.getUserName().matches("[A-Za-z0-9]+")) {
 			throw new ValidateUserException(OnlinePizzaConstants.USERNAME_CANNOT_BE_EMPTY);
 		}
-		if (!user.getPassword().matches("[A-Za-z0-9]+")) {
+		if (!user.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
 			throw new ValidateUserException(OnlinePizzaConstants.PASSWORD_CANNOT_BE_EMPTY);
 		}
 		return true;
@@ -68,7 +68,7 @@ public class IUserService {
 				if (oldPassword.equals(newPassword)) {
 					return false;
 				} else {
-					if (newPassword.matches("[A-Za-z0-9]+")) {
+					if (newPassword.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
 						throw new ValidateUserException(OnlinePizzaConstants.PASSWORD_CANNOT_BE_EMPTY);
 					}
 					iur.replace(id, oldPassword, newPassword);
