@@ -2,9 +2,12 @@ package com.cg.onlinepizza.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.onlinepizza.exceptions.CoupanExistException;
 import com.cg.onlinepizza.exceptions.CoupanIdNotFoundException;
 import com.cg.onlinepizza.exceptions.InvalidCoupanOperationException;
 import com.cg.onlinepizza.exceptions.ValidateCoupanException;
@@ -17,21 +20,27 @@ public class ICoupanService {
     @Autowired
     ICoupanRepository ICoupanRepository;
  
-	public Coupan addCoupans(Coupan coupan)throws ValidateCoupanException{
+	public Coupan addCoupans(Coupan coupan)throws ValidateCoupanException, CoupanExistException{
 		    validateCoupan(coupan);
-		    return ICoupanRepository.save(coupan);
-			
+		    Optional<Coupan> optionalCoupan = ICoupanRepository.findById(coupan.getCoupanId());
+		    if(!optionalCoupan.isPresent()) {
+		        return ICoupanRepository.save(coupan);
+		    }
+		    throw new CoupanExistException(OnlinePizzaConstants.COUPAN_EXIST);		
 	};
 
-	public Coupan editCoupans(Coupan coupan)throws InvalidCoupanOperationException{
+	public Coupan editCoupans(Coupan coupan)throws ValidateCoupanException,CoupanIdNotFoundException{
 		try {
 			if(ICoupanRepository.existsById(coupan.getCoupanId())) {
-			return ICoupanRepository.save(coupan);
+			   if(!validateCoupan(coupan)) {
+				  throw new ValidateCoupanException();
+			   }	
+			   return ICoupanRepository.save(coupan);
 			}else {
-				throw new InvalidCoupanOperationException();
+				throw new CoupanIdNotFoundException();
 			}
-		}catch(Exception e) {
-			throw new InvalidCoupanOperationException("Operation is not valid");
+		}catch(CoupanIdNotFoundException ci) {
+			throw new CoupanIdNotFoundException(OnlinePizzaConstants.COUPAN_ID_NOT_FOUND);
 		}
 	}
 	
@@ -53,10 +62,15 @@ public class ICoupanService {
 
 	public int deleteCoupans(int coupanId)throws CoupanIdNotFoundException{
 		try {
-		ICoupanRepository.deleteById(coupanId);
-		return coupanId;
+		Optional<Coupan> optionalCoupan = ICoupanRepository.findById(coupanId);
+		if(optionalCoupan.isPresent()) {
+		    ICoupanRepository.deleteById(coupanId);
+		    return coupanId;
+		}else {
+			throw new CoupanIdNotFoundException();
+		}
 		}catch(Exception e) {
-			throw new CoupanIdNotFoundException("Coupan not found");
+			throw new CoupanIdNotFoundException(OnlinePizzaConstants.COUPAN_ID_NOT_FOUND);
 		}
 	}
 
