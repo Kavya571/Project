@@ -6,14 +6,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.onlinepizza.dto.Coupan;
 import com.cg.onlinepizza.dto.PizzaOrder;
 import com.cg.onlinepizza.dto.User;
+import com.cg.onlinepizza.exceptions.InvalidMinCostException;
 import com.cg.onlinepizza.exceptions.InvalidSizeException;
 import com.cg.onlinepizza.exceptions.OrderIdNotFoundException;
 import com.cg.onlinepizza.exceptions.UserNotFoundException;
+import com.cg.onlinepizza.exceptions.ValidateCoupanException;
 import com.cg.onlinepizza.exceptions.ValidatePizzaOrderException;
 import com.cg.onlinepizza.repository.IPizzaOrderRepository;
-import com.cg.onlinepizza.util.OnlinePizzaOrderConstants;
+import com.cg.onlinepizza.repository.IPizzaRepository;
+import com.cg.onlinepizza.util.OnlinePizzaConstants;
 
 
 @Service
@@ -21,7 +25,8 @@ public class IPizzaOrderService {
 	@Autowired
 	IPizzaOrderRepository IPizzaOrderRepository;
 	
-	public PizzaOrder bookPizzaOrder(PizzaOrder orders) {
+	public PizzaOrder bookPizzaOrder(PizzaOrder orders) throws ValidatePizzaOrderException {
+		validatePizzaOrder(orders);
 		return IPizzaOrderRepository.save(orders);
 	}
 
@@ -53,23 +58,28 @@ public class IPizzaOrderService {
 		return pizzaorder;
 	}
 	
-	public boolean ValidatePizzaOrder(PizzaOrder pizzaorder) throws ValidatePizzaOrderException {
-		if(!pizzaorder.getSize().matches("[A-Za-z]||[z-aA-Z"))
-			throw new ValidatePizzaOrderException(OnlinePizzaOrderConstants.PIZZAORDER_CANNOT_BE_EMPTY);
-				
-		if(!(pizzaorder.getQuantity()==0))
-			throw new ValidatePizzaOrderException(OnlinePizzaOrderConstants.PIZZAORDER_CANNOT_BE_EMPTY);
-				
-			return true;
-	}
-	
-	
-	public List<PizzaOrder> caluculateTotal(String size, int quantity) throws InvalidSizeException{
-		List<PizzaOrder> pizzaList= new ArrayList<PizzaOrder>(); // caluculateTotal(size,quantity);
-		return pizzaList;
+	public boolean validatePizzaOrder(PizzaOrder pizzaorder) throws ValidatePizzaOrderException {
+		if(!pizzaorder.getSize().matches("[A-Za-z]+"))
+			throw new ValidatePizzaOrderException(OnlinePizzaConstants.PIZZAORDER_CANNOT_BE_EMPTY);
 		
-	}
+		if(pizzaorder.getQuantity()==0)
+			throw new ValidatePizzaOrderException(OnlinePizzaConstants.PIZZAORDER_QUANTITY_CANNOT_BE_EMPTY);
 	
+		return true;
+				
+	}
+		
+//	public List<PizzaOrder> caluculateTotal(String size, int quantity) throws InvalidSizeException{
+////		List<PizzaOrder> pizzaList= new ArrayList<PizzaOrder>(); // caluculateTotal(size,quantity);
+////		IPizzaOrderRepository.findAll().forEach(pizzaorder1 -> pizzaList.add(pizzaorder1));
+//		try {
+//			return IPizzaRepository.getAll(size,quantity);
+//		}catch(Exception e) {
+//			throw new InvalidSizeException("Enter valid min cost");
+//		}
+//	}
+//		//return pizzaList;
+//	
 	public double calculateTotal(String size, int quantity) {
 		double totalCost;
 		if(size=="small") {
