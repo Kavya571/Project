@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.onlinepizza.dto.Pizza;
 import com.cg.onlinepizza.dto.PizzaOrder;
 import com.cg.onlinepizza.dto.User;
+import com.cg.onlinepizza.exceptions.InvalidMinCostException;
 import com.cg.onlinepizza.exceptions.InvalidSizeException;
 import com.cg.onlinepizza.exceptions.OrderIdNotFoundException;
 import com.cg.onlinepizza.exceptions.UserNotFoundException;
+import com.cg.onlinepizza.exceptions.ValidatePizzaOrderException;
 import com.cg.onlinepizza.service.IPizzaOrderService;
 
 @RestController
@@ -38,7 +41,7 @@ public class PizzaOrderController {
 		return null;
 	}
 	@PostMapping("/orders")
-	public int saveOrder(@RequestBody PizzaOrder orders) {
+	public int saveOrder(@RequestBody PizzaOrder orders) throws ValidatePizzaOrderException {
 		double totalcost= ipo.calculateTotal(orders.getSize(),orders.getQuantity());
 		orders.setTotalCost(totalcost);
 		ipo.bookPizzaOrder(orders);
@@ -46,9 +49,8 @@ public class PizzaOrderController {
 	}
 //	@GetMapping("/viewTotalCost/{size}/{qty}")
 //	public List<PizzaOrder> caluculateTotal(@PathVariable("size") String size,@PathVariable("qty") int quantity) throws OrderIdNotFoundException, InvalidSizeException {
-//		return ipo.caluculateTotal(size, quantity);
+//			return ipo.caluculateTotal(size,quantity);
 //	}
-//	
 	
 	@PutMapping("/updateorder")
 	public PizzaOrder updatePizzaOrder(@RequestBody PizzaOrder orders) {
