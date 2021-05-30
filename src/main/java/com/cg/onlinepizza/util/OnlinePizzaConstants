@@ -13,4 +13,9 @@ public class OnlinePizzaConstants {
         public static final String PASSWORD_CANNOT_BE_EMPTY = "Password should contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character";
 	public static final String USER_ADDED = "User added successfully";
 	
+	public static final String CUSTOMER_ADDED="Customer added successfully";
+	public static final String CUSTOMER_UPDATED="Customer updated successfully";
+	public static final String CUSTOMER_DELETED="Customer deleted successfully";
+	
+	
 }
