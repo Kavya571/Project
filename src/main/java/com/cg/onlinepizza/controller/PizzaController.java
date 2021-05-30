@@ -12,16 +12,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.onlinepizza.dto.Pizza;
+import com.cg.onlinepizza.dto.SuccessMsg;
 import com.cg.onlinepizza.exceptions.InvalidMinCostException;
+import com.cg.onlinepizza.exceptions.PizzaException;
+import com.cg.onlinepizza.exceptions.PizzaFoundException;
 import com.cg.onlinepizza.exceptions.PizzaIdNotFoundException;
+import com.cg.onlinepizza.exceptions.ValidatePizzaException;
 import com.cg.onlinepizza.service.IPizzaService;
+import com.cg.onlinepizza.util.OnlinePizzaConstants;
+
 
 @RestController
 public class PizzaController {
 	@Autowired
 	IPizzaService ips;
 	@GetMapping("/viewPizza")
-	private List<Pizza> viewPizzaList() {
+	private List<Pizza> viewPizzaList() throws PizzaException {
 		return ips.viewPizzaList();
 	}
 	@GetMapping("/viewPizza/{id}")
@@ -33,20 +39,20 @@ public class PizzaController {
 		return ips.viewPizzaList(minCost,maxCost);
 	}
 	@DeleteMapping("/pizza/{pizzaId}")
-	private void deletePizza(@PathVariable("pizzaId") int id) throws PizzaIdNotFoundException {
+	private SuccessMsg deletePizza(@PathVariable("pizzaId") int id) throws PizzaIdNotFoundException {
 		ips.deletePizza(id);
+		return new SuccessMsg(OnlinePizzaConstants.PIZZA_DELETED);
 	}
 
 	@PostMapping("/pizza")
-	private int save(@RequestBody Pizza pizza) {
-		ips.addPizza(pizza);
-		return pizza.getPizzaId();
+	private SuccessMsg savePizza(@RequestBody Pizza pizza) throws PizzaFoundException, ValidatePizzaException {
+		return new SuccessMsg(OnlinePizzaConstants.PIZZA_ADDED+pizza.getPizzaId());
 	}
 
 	@PutMapping("/update")
-	private Pizza update(@RequestBody Pizza pizza) {
+	private SuccessMsg update(@RequestBody Pizza pizza) throws PizzaIdNotFoundException, ValidatePizzaException {
 		ips.updatePizza(pizza);
-		return pizza;
+		return new SuccessMsg(OnlinePizzaConstants.PIZZA_UPDATED+pizza.getPizzaId());
 	}
 	
 }
