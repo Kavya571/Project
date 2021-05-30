@@ -24,6 +24,13 @@ public class OnlinePizzaConstants {
 	public static final String CUSTOMER_ADDED="Customer added successfully";
 	public static final String CUSTOMER_UPDATED="Customer updated successfully";
 	public static final String CUSTOMER_DELETED="Customer deleted successfully";
+	public static final String CUSTOMER_CANNOT_BE_EMPTY = "Customer name cannot be empty";
+	public static final String USERNAME_CANNOT_BE_EMPTY = "Username cannot be empty";
+	public static final String MOBILENUMBER_CANNOT_BE_EMPTY = "Mobile number should contain 10 digits";
+	public static final String EMAIL_CANNOT_BE_EMPTY = "Email should be in given format: example@gmail.com";
+	public static final String PASSWORD_CANNOT_BE_EMPTY = "Password should contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character";
+	public static final String ADDRESS_CANNOT_BE_EMPTY = "Address should be in given format: #house number, street name, city - pincode";
+
 	
 	
 }
