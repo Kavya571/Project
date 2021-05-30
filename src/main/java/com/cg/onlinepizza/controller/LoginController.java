@@ -30,7 +30,7 @@ public class LoginController {
 	@PostMapping("/User")
 	private SuccessMsg SaveUser(@RequestBody User user) throws ValidateUserException {
 		ius.addNewUser(user);
-		return new SuccessMsg(OnlinePizzaConstants.USER_ADDED + user.getUserId());
+		return new SuccessMsg(OnlinePizzaConstants.USER_ADDED +" "+ user.getUserId());
 	}
 
 	@PostMapping("/forgot/{id}/{old}/{new1}")
