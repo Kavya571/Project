@@ -1,0 +1,11 @@
+package com.cg.onlinepizza.exceptions;
+
+public class ValidateCoupanException extends Exception{
+	public ValidateCoupanException() {
+		// TODO Auto-generated constructor stub
+	}
+	public ValidateCoupanException(String message) {
+		super(message);
+	}
+
+}
