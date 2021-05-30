@@ -4,7 +4,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.onlinepizza.dto.Coupan;
 import com.cg.onlinepizza.service.ICoupanService;
+import com.cg.onlinepizza.util.OnlinePizzaConstants;
 import com.cg.onlinepizza.exceptions.CoupanIdNotFoundException;
 import com.cg.onlinepizza.exceptions.InvalidCoupanOperationException;
-
+import com.cg.onlinepizza.exceptions.ValidateCoupanException;
+import com.cg.onlinepizza.dto.*;
 @RestController
 public class CoupanController {
 	@Autowired
@@ -28,23 +29,24 @@ public class CoupanController {
 	@GetMapping("/viewCoupan")
 	public List<Coupan> viewCoupans(){
 		return ics.viewCoupans();
+		
 	}
 	@PostMapping("/coupan")
-	public int addcoupan(@RequestBody Coupan coupan) {
+	public SuccessMsg addcoupan(@RequestBody Coupan coupan) throws ValidateCoupanException {
 		ics.addCoupans(coupan);
-		return coupan.getCoupanId();
+		return new SuccessMsg(OnlinePizzaConstants.COUPAN_ADDED);
 	}
 	
 	@PutMapping("/edit")
-	public Coupan edit(@RequestBody Coupan coupan) throws InvalidCoupanOperationException {
+	public SuccessMsg edit(@RequestBody Coupan coupan) throws InvalidCoupanOperationException {
 		ics.editCoupans(coupan);
-		return coupan;
+		return new SuccessMsg(OnlinePizzaConstants.COUPAN_UPDATED);
 	}
 	
-	@DeleteMapping("coupan/{coupanId}")
-	public int deleteCoupan(@PathVariable("coupanId") int id) throws CoupanIdNotFoundException{
+	@DeleteMapping("/coupan/{coupanId}")
+	public SuccessMsg deleteCoupan(@PathVariable("coupanId") int id) throws CoupanIdNotFoundException{
 		ics.deleteCoupans(id);
-		return id;
+		return new SuccessMsg(OnlinePizzaConstants.COUPAN_DELETED);
 	}
 	
 
