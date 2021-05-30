@@ -9,4 +9,8 @@ public class OnlinePizzaConstants {
 	public static final String PIZZA_ADDED="pizza added successfully";
 	public static final String PIZZA_UPDATED="pizza updated successfully";
 	public static final String PIZZA_DELETED="pizza deleted successfully";
+	public static final String USERNAME_CANNOT_BE_EMPTY = "Username cannot be empty and it is alphanumeric";
+	public static final String PASSWORD_CANNOT_BE_EMPTY = "Password cannot be empty and it is alphanumeric";
+	public static final String USER_ADDED = "User added successfully";
+	
 }
