@@ -1,0 +1,12 @@
+package com.cg.onlinepizza.util;
+
+public class OnlinePizzaConstants {
+	public static final String PIZZA_NAME_CANNOT_BE_EMPTY="pizza name contain only alphabets and one space";
+	public static final String PIZZA_COST_CANNOT_BE_EMPTY="pizza cost must be numeric";
+	public static final String PIZZA_COST_AFTER_CUOPAN_CANNOT_BE_EMPTY="pizza cost after cuopan must be numeric";
+	public static final String PIZZA_TYPE_CANNOT_BE_EMPTY="pizza type must be alphabets,single word and not empty";
+	public static final String PIZZA_DESCRIPTION_CANNOT_BE_EMPTY="pizza description must be alphabets and not empty";
+	public static final String PIZZA_ADDED="pizza added successfully";
+	public static final String PIZZA_UPDATED="pizza updated successfully";
+	public static final String PIZZA_DELETED="pizza deleted successfully";
+}
