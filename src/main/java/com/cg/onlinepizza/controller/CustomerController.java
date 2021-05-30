@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.onlinepizza.exceptions.CustomerIdNotFoundException;
+import com.cg.onlinepizza.exceptions.ValidateCustomerException;
 import com.cg.onlinepizza.service.ICustomerService;
+import com.cg.onlinepizza.util.OnlinePizzaConstants;
 import com.cg.onlinepizza.dto.Customer;
+import com.cg.onlinepizza.dto.SuccessMsg;
 
 @RestController
 public class CustomerController {
@@ -27,25 +30,22 @@ public class CustomerController {
 	public Customer viewCustomers(@PathVariable("id") int customerId) throws CustomerIdNotFoundException {
 		return ics.viewCustomer1(customerId);
 	}
-//	@GetMapping("/viewPizza/{minCost}/{maxCost}")
-//	private List<Pizza> viewPizzaList(@PathVariable("minCost") double minCost,@PathVariable("maxCost") double maxCost){
-//		return ips.viewPizzaList();
-//	}
+	
 	@DeleteMapping("/customer/{customerId}")
-	public Customer deleteCustomer(@PathVariable("customerId") int id) throws CustomerIdNotFoundException {
+	public SuccessMsg deleteCustomer(@PathVariable("customerId") int id) throws CustomerIdNotFoundException {
 		ics.deleteCustomer(id);
-		return null;
+		return new SuccessMsg(OnlinePizzaConstants.CUSTOMER_DELETED);
 	}
 
 	@PostMapping("/customer")
-	public int saveCust(@RequestBody Customer customer) {
+	public SuccessMsg saveCust(@RequestBody Customer customer) throws ValidateCustomerException {
 		ics.addCustomer(customer);
-		return customer.getCustomerId();
+		return new SuccessMsg(OnlinePizzaConstants.CUSTOMER_DELETED + customer.getCustomerId());
 	}
 
 	@PutMapping("/updateCustomer")
-	public Customer update(@RequestBody Customer customer) {
+	public SuccessMsg update(@RequestBody Customer customer) {
 		ics.updateCustomer(customer);
-		return customer;
+		return new SuccessMsg(OnlinePizzaConstants.CUSTOMER_DELETED + customer);
 	}
 }
