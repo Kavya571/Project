@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.onlinepizza.service.ICoupanService;
 import com.cg.onlinepizza.util.OnlinePizzaConstants;
+import com.cg.onlinepizza.exceptions.CoupanExistException;
 import com.cg.onlinepizza.exceptions.CoupanIdNotFoundException;
 import com.cg.onlinepizza.exceptions.InvalidCoupanOperationException;
 import com.cg.onlinepizza.exceptions.ValidateCoupanException;
@@ -32,13 +33,13 @@ public class CoupanController {
 		
 	}
 	@PostMapping("/coupan")
-	public SuccessMsg addcoupan(@RequestBody Coupan coupan) throws ValidateCoupanException {
+	public SuccessMsg addcoupan(@RequestBody Coupan coupan) throws ValidateCoupanException, CoupanExistException {
 		ics.addCoupans(coupan);
 		return new SuccessMsg(OnlinePizzaConstants.COUPAN_ADDED);
 	}
 	
 	@PutMapping("/edit")
-	public SuccessMsg edit(@RequestBody Coupan coupan) throws InvalidCoupanOperationException {
+	public SuccessMsg edit(@RequestBody Coupan coupan) throws ValidateCoupanException, CoupanIdNotFoundException {
 		ics.editCoupans(coupan);
 		return new SuccessMsg(OnlinePizzaConstants.COUPAN_UPDATED);
 	}
