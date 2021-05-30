@@ -31,6 +31,10 @@ public class OnlinePizzaConstants {
 	public static final String PASSWORD_CANNOT_BE_EMPTY = "Password should contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character";
 	public static final String ADDRESS_CANNOT_BE_EMPTY = "Address should be in given format: #house number, street name, city - pincode";
 
-	
+	public static final String PIZZAORDER_CANNOT_BE_EMPTY = "size not found";
+	public static final String PIZZAORDER_QUANTITY_CANNOT_BE_EMPTY = "Quantity cannot be zero";
+	public static final String PIZZAORDER_DELETED = "pizza order deleted successfully";
+	public static final String PIZZAORDER_ADDED = "pizza order added successfully";
+	public static final String PIZZAORDER_UPDATED = "pizza order updated successfully";
 	
 }
