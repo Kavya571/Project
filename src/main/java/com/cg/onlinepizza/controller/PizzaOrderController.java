@@ -12,42 +12,51 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.onlinepizza.dto.PizzaOrder;
+import com.cg.onlinepizza.dto.User;
+import com.cg.onlinepizza.exceptions.InvalidSizeException;
 import com.cg.onlinepizza.exceptions.OrderIdNotFoundException;
+import com.cg.onlinepizza.exceptions.UserNotFoundException;
 import com.cg.onlinepizza.service.IPizzaOrderService;
-
 
 @RestController
 public class PizzaOrderController {
 	@Autowired
 	IPizzaOrderService ipo;
 	@GetMapping("/viewOrders")
-	private List<PizzaOrder> viewOrdersList() {
+	public List<PizzaOrder> viewOrdersList() {
 		return ipo.viewOrdersList();
 	}
 
 	@GetMapping("/viewPizzaOrder/{id}")
-	private PizzaOrder viewPizzaOrderList(@PathVariable("id") int orderId) throws OrderIdNotFoundException {
+	public PizzaOrder viewPizzaOrderList(@PathVariable("id") int orderId) throws OrderIdNotFoundException {
 		return ipo.viewPizzaOrder(orderId);
 	}
 	
 	@DeleteMapping("/pizzaorder/{bookingOrderId}")
-	private void cancelPizzaOrder(@PathVariable("bookingOrderId") int orderid) throws OrderIdNotFoundException {
+	public PizzaOrder cancelPizzaOrder(@PathVariable("bookingOrderId") int orderid) throws OrderIdNotFoundException {
 		ipo.cancelPizzaOrder(orderid);
+		return null;
 	}
-
 	@PostMapping("/orders")
-	private int saveOrder(@RequestBody PizzaOrder orders) {
+	public int saveOrder(@RequestBody PizzaOrder orders) {
+		double totalcost= ipo.calculateTotal(orders.getSize(),orders.getQuantity());
+		orders.setTotalCost(totalcost);
 		ipo.bookPizzaOrder(orders);
 		return orders.getBookingId();
 	}
+//	@GetMapping("/viewTotalCost/{size}/{qty}")
+//	public List<PizzaOrder> caluculateTotal(@PathVariable("size") String size,@PathVariable("qty") int quantity) throws OrderIdNotFoundException, InvalidSizeException {
+//		return ipo.caluculateTotal(size, quantity);
+//	}
+//	
 	
-
 	@PutMapping("/updateorder")
-	private PizzaOrder updatePizzaOrder(@RequestBody PizzaOrder orders) {
+	public PizzaOrder updatePizzaOrder(@RequestBody PizzaOrder orders) {
+		double totalcost= ipo.calculateTotal(orders.getSize(),orders.getQuantity());
+		orders.setTotalCost(totalcost);
 		ipo.updatePizzaOrder(orders);
 		return orders;
 	}
-	
-	
+		
 
 }
