@@ -1,0 +1,10 @@
+package com.cg.onlinepizza.exceptions;
+
+public class CoupanExistException extends Exception{
+	public CoupanExistException() {
+
+	}
+	public CoupanExistException(String message) {
+		super(message);
+	}
+}
