@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -31,7 +32,17 @@ public class Customer {
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name = "customerId")
 	private List<PizzaOrder>pizzaorders = new ArrayList<PizzaOrder>();
-
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	private User user;
+	
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public int getCustomerId() {
 		return customerId;
 	}
