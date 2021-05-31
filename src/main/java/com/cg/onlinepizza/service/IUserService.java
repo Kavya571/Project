@@ -17,8 +17,12 @@ public class IUserService {
 	IUserRepository iur;
 
 	public User addNewUser(User user) throws ValidateUserException {
-		validateUser(user);
-		return iur.save(user);
+		if ((iur.userexist(user.getUserName())) == null) {
+			return iur.save(user);
+		} else {
+			validateUser(user);
+			return iur.save(user);
+		}
 	}
 
 	private boolean validateUser(User user) throws ValidateUserException {
@@ -27,6 +31,9 @@ public class IUserService {
 		}
 		if (!user.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
 			throw new ValidateUserException(OnlinePizzaConstants.PASSWORD_CANNOT_BE_EMPTY);
+		}
+		if (iur.existsById((iur.userexist(user.getUserName())))) {
+			throw new ValidateUserException(OnlinePizzaConstants.USERNAME_EXISTS_ALREADY);
 		}
 		return true;
 	}
@@ -62,22 +69,22 @@ public class IUserService {
 
 	}
 
-	public boolean forgotPassword(int id, String oldPassword, String newPassword) throws UserNotFoundException {
+	public boolean forgotPassword(int id, String oldPassword, String newPassword)
+			throws UserNotFoundException, ValidateUserException {
 		try {
-			if (iur.existsById(id)) {
-				if (oldPassword.equals(newPassword)) {
-					return false;
+			if (iur.existsById(id) && ((iur.checkpassword(id)).equals(oldPassword))) {
+				return false;
+			} else if (iur.existsById(id)) {
+				if (!newPassword.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
+					throw new ValidateUserException(OnlinePizzaConstants.PASSWORD_CANNOT_BE_EMPTY);
 				} else {
-					if (!newPassword.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
-						throw new ValidateUserException(OnlinePizzaConstants.PASSWORD_CANNOT_BE_EMPTY);
-					}
-					iur.replace(id, oldPassword, newPassword);
+					iur.replace(id, iur.checkpassword(id), newPassword);
 					return true;
 				}
 			} else {
-				throw new UserNotFoundException();
+				throw new UserNotFoundException("User not Exists");
 			}
-		} catch (Exception e) {
+		} catch (UserNotFoundException e) {
 			throw new UserNotFoundException("User not Exists");
 		}
 	}
