@@ -1,5 +1,7 @@
 package com.cg.onlinepizza.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -24,5 +26,8 @@ public interface IUserRepository extends JpaRepository<User, Integer> {
 
 	@Query(value = "select user_name from user where user_id=:userId", nativeQuery = true)
 	String checkusername(@Param("userId") int userId);
+
+	@Query(value = "select user_id from user where user_name=:userName", nativeQuery = true)
+	Integer userexist(@Param("userName") String userName);
 
 }
