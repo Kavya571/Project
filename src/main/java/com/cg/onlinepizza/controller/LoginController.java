@@ -30,12 +30,12 @@ public class LoginController {
 	@PostMapping("/User")
 	private SuccessMsg SaveUser(@RequestBody User user) throws ValidateUserException {
 		ius.addNewUser(user);
-		return new SuccessMsg(OnlinePizzaConstants.USER_ADDED +" "+ user.getUserId());
+		return new SuccessMsg(OnlinePizzaConstants.USER_ADDED + " " + user.getUserId());
 	}
 
 	@PostMapping("/forgot/{id}/{old}/{new1}")
 	private boolean forgotPassword(@PathVariable("id") int id, @PathVariable("old") String old,
-			@PathVariable("new1") String new1) throws UserNotFoundException {
+			@PathVariable("new1") String new1) throws UserNotFoundException, ValidateUserException {
 		return ius.forgotPassword(id, old, new1);
 	}
 }
