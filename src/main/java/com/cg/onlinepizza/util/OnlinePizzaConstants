@@ -17,9 +17,11 @@ public class OnlinePizzaConstants {
 	public static final String PIZZA_ADDED="pizza added successfully";
 	public static final String PIZZA_UPDATED="pizza updated successfully";
 	public static final String PIZZA_DELETED="pizza deleted successfully";
+	
 	public static final String USERNAME_CANNOT_BE_EMPTY = "Username cannot be empty and it is alphanumeric";
         public static final String PASSWORD_CANNOT_BE_EMPTY = "Password should contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character";
 	public static final String USER_ADDED = "User added successfully";
+	public static final String USERNAME_EXISTS_ALREADY = "Username already exists";
 	
 	public static final String CUSTOMER_ADDED="Customer added successfully";
 	public static final String CUSTOMER_UPDATED="Customer updated successfully";
