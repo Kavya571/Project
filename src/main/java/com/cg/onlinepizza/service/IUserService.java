@@ -68,7 +68,7 @@ public class IUserService {
 				if (oldPassword.equals(newPassword)) {
 					return false;
 				} else {
-					if (newPassword.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
+					if (!newPassword.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
 						throw new ValidateUserException(OnlinePizzaConstants.PASSWORD_CANNOT_BE_EMPTY);
 					}
 					iur.replace(id, oldPassword, newPassword);
