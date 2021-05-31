@@ -4,6 +4,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,11 @@ import com.cg.onlinepizza.service.IPizzaService;
 public class PizzaServiceTest extends OnlinePizzaApplicationTests {
 	@Autowired
 	IPizzaService service;
-//	@Test
-//	public void testAddPizza() throws PizzaFoundException, ValidatePizzaException {
-//		Pizza newPizz=new Pizza(1,"Medium","Cheese Burst","Vegetarian",200,100);
-//		assertEquals(PizzaFoundException.class,service.addPizza(newPizz));
-//	}
+	@Test
+	public void testAddPizza() throws PizzaFoundException, ValidatePizzaException {
+		Pizza newPizz=new Pizza(1,"Medium","CheeseBurst","Vegetarian",200,100);
+		assertThrows(ValidatePizzaException.class,()->service.addPizza(newPizz));
+	}
 	@Test
 	public void testAddPizza1() throws PizzaFoundException, ValidatePizzaException {
 		Pizza newPizz=new Pizza(10,"Large","Cheese Burst","Vegetarian",200,100);
