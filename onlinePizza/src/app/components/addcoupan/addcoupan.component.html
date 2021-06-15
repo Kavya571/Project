@@ -1,1 +1,69 @@
-<p>addcoupan works!</p>
+<h3>Create Coupan</h3>
+
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4" >
+    <div [hidden]="submitted" style="width: 400px;">
+      <form [formGroup]="coupansaveform" #savecoupan (ngSubmit)="saveCoupan(saveCoupan)">
+          <div class="form-group">
+              <label for="name">Coupan Name</label>
+              <input type="text" class="form-control"  formControlName="coupanName" data-toggle="tooltip" 
+                 data-placement="right" title="Enter Coupan Name" >
+              <div class="alert alert-danger" *ngIf = "(CoupanName.touched) && (CoupanName.invalid)" 
+                style="margin-top: 5px;">
+                  <span *ngIf="CoupanName.errors.required">Coupan Name is Required</span>
+                    <span *ngIf = "CoupanName.errors.minlength"> 
+                        MinLength Error 
+                    </span>                   
+                </div>
+          </div>
+  
+          <div class="form-group">
+              <label for="name">Coupan Type</label>
+              <input type="text" class="form-control" formControlName="coupanType" 
+                data-toggle="tooltip" data-placement="right" title="Enter Coupan Type">
+                <div class="alert alert-danger" *ngIf = "(CoupanType.touched) && (CoupanName.invalid)" 
+                style="margin-top: 5px;">
+                  <span *ngIf="CoupanType.errors.required">Coupan Type is Required</span>                 
+                </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name">Coupan Description</label>
+            <input type="text" class="form-control" formControlName="coupanDescription" 
+              data-toggle="tooltip" data-placement="right" title="Enter Coupan Description">
+              <div class="alert alert-danger" *ngIf = "(CoupanDescription.touched) && (CoupanName.invalid)" 
+              style="margin-top: 5px;">
+                <span *ngIf="CoupanDescription.errors.required">Coupan Description is Required</span>                  
+              </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Coupan Pizza Id</label>
+            <input type="text" class="form-control" formControlName="coupanPizzaId" 
+              data-toggle="tooltip" data-placement="right" title="Enter Coupan Pizza Id">
+              <div class="alert alert-danger" *ngIf = "(CoupanPizzaId.touched) && (CoupanName.invalid)" 
+              style="margin-top: 5px;">
+                <span *ngIf="CoupanPizzaId.errors.required">Coupan Pizza Id is Required</span>                  
+              </div>
+        </div>
+          <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+  </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+      <div [hidden]="!submitted">
+         <h4>Coupan Added SuccessFully!</h4>
+         <button (click)="addCoupanForm()" class='btn btn-primary'>Add More Coupan</button>
+      </div>      
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+
+
+
+
