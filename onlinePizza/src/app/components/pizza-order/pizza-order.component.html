@@ -1,1 +1,48 @@
-<p>pizza-order works!</p>
+<!----><div style="background-image: url('assets/pizza.jpg');background-color: transparent;height: 5cm;width:100%;"
+src="assets/pizza.jpg"></div>
+<div style="border:1px solid black;">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 style="text-align: center">PizzaOrders</h1><br>
+        <div class="row" [hidden]="!deleteMessage">
+             
+                  <div class="col-sm-4"></div>
+                  <div class="col-sm-4">
+                          <div class="alert alert-info alert-dismissible">
+                                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                  <strong>PizzaOrder Data Deleted</strong>
+                          </div>
+                  </div>
+                  <div class="col-sm-4"></div>
+          </div>           
+      </div>
+  
+    
+    <div class="panel-body"  style="border: 10cm;color: red;">
+        <table  class="table table-hover table-sm" datatable [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"  >
+            <thead class="thead-light">
+                <tr>
+                    <th>dateOfOrder</th>
+                    <th>transactionMode</th>
+                    <th>quantity</th>
+                    <th>size</th>
+                    <th>totalCost</th>
+                </tr>
+            </thead>
+            <tbody>
+                 <tr *ngFor="let po of PizzaOrders">
+                    <td>{{po.dateOfOrder}}</td>
+                    <td>{{po.transactionMode}}</td>
+                    <td>{{po.quantity}}</td>
+                    <td>{{po.size}}</td>
+                    <td><button (click)="delete(po.pizzaId)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>&nbsp;
+                      <button (click)="updatePizzaOrder(po.bookingId)" class='btn btn-info'
+                      data-toggle="modal" data-target="#myModal">Update</button>
+                    </td>
+                  </tr> 
+            </tbody><br>
+        </table>
+    </div>
+  </div> 
+</div>
