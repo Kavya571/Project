@@ -36,7 +36,8 @@ src="assets/pizza.jpg"></div>
                     <td>{{po.transactionMode}}</td>
                     <td>{{po.quantity}}</td>
                     <td>{{po.size}}</td>
-                    <td><button (click)="delete(po.pizzaId)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>&nbsp;
+                   <td>{{po.totalCost}}</td>
+                    <td><button (click)="delete(po.bookingId)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>&nbsp;
                       <button (click)="updatePizzaOrder(po.bookingId)" class='btn btn-info'
                       data-toggle="modal" data-target="#myModal">Update</button>
                     </td>
