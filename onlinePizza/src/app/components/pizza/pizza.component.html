@@ -1,0 +1,48 @@
+<!----><div style="background-image: url('assets/pizza.jpg');background-color: transparent;height: 5cm;width:32.8cm;"
+src="assets/pizza.jpg"></div>
+<div style="border:1px solid black;">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 style="text-align: center">Pizzas</h1><br>
+        <div class="row" [hidden]="!deleteMessage">
+             
+                  <div class="col-sm-4"></div>
+                  <div class="col-sm-4">
+                          <div class="alert alert-info alert-dismissible">
+                                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                  <strong>Pizza Data Deleted</strong>
+                          </div>
+                  </div>
+                  <div class="col-sm-4"></div>
+          </div>           
+      </div>
+  
+    
+    <div class="panel-body"  style="border: 10cm;color: red;">
+        <table  class="table table-hover table-sm" datatable [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"  >
+            <thead class="thead-light">
+                <tr>
+                    <th>Pizza Name</th>
+                    <th>Pizza Type</th>
+                    <th>Pizza Description</th>
+                    <th>Pizza Cost</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                 <tr *ngFor="let p of Pizzas">
+                    <td>{{p.pizzaName}}</td>
+                    <td>{{p.pizzaType}}</td>
+                    <td>{{p.pizzaDescription}}</td>
+                    <td>{{p.pizzaCost}}</td>
+                    <td><button (click)="delete(p.pizzaId)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>&nbsp;
+                      <button (click)="updateStudent(p.pizzaId)" class='btn btn-info'
+                      data-toggle="modal" data-target="#myModal">Update</button>
+                    </td>
+                  </tr> 
+            </tbody><br>
+        </table>
+    </div>
+  </div> 
+</div>
