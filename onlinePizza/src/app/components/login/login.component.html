@@ -1,1 +1,34 @@
-<p>login works!</p>
+<h3>Login</h3>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4" >
+    <div [hidden]="submitted" style="width: 400px;">
+      <form [formGroup]="usersaveform" #saveuser (ngSubmit)="saveUser(saveUser)">
+          <div class="form-group">
+              <label for="name">User Name</label>
+              <input type="text" class="form-control"  formControlName="userName" data-toggle="tooltip" 
+                 data-placement="right" title="Enter User Name" >
+              <div class="alert alert-danger" *ngIf = "(UserName.touched) && (UserName.invalid)" 
+                style="margin-top: 5px;">
+                  <span *ngIf="UserName.errors.required">User Name is Required</span>
+                    <span *ngIf = "UserName.errors.minlength"> 
+                        MinLength Error 
+                    </span>                   
+                </div>
+          </div>
+  
+          <div class="form-group">
+              <label for="name">Password</label>
+              <input type="password" class="form-control" formControlName="password" 
+                data-toggle="tooltip" data-placement="right" title="Enter Password">
+                <div class="alert alert-danger" *ngIf = "(Password.touched) && (Password.invalid)" 
+                style="margin-top: 5px;">
+                  <span *ngIf="Password.errors.required">Password is Required</span>                 
+                </div>
+          </div>
+          <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+  </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
