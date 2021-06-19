@@ -1,1 +1,94 @@
-<p>addcustomer works!</p>
+<h3>Create Customer</h3>
+
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4" >
+    <div [hidden]="submitted" style="width: 400px;">
+      <form [formGroup]="customersaveform" #savecustomer (ngSubmit)="saveCustomer(savecustomer)">
+
+          <div class="form-group">
+              <label for="name">Customer Name</label>
+              <input type="text" class="form-control"  formControlName="customerName" data-toggle="tooltip" 
+                 data-placement="right" title="Enter Customer Name" >
+              <div class="alert alert-danger" *ngIf = "(CustomerName.touched) && (CustomerName.invalid)" 
+                style="margin-top: 5px;">
+                  <span *ngIf="CustomerName.errors.required">Customer Name is Required</span>
+                    <span *ngIf = "CustomerName.errors.minlength"> 
+                        MinLength Error 
+                    </span>                   
+                </div>
+          </div>
+  
+          <div class="form-group">
+              <label for="email">Customer Email</label>
+              <input type="text" class="form-control" formControlName="customerEmail" 
+                data-toggle="tooltip" data-placement="right" title="Enter Customer Email">
+                <div class="alert alert-danger" *ngIf = "(CustomerEmail.touched) && (CustomerEmail.invalid)" 
+                style="margin-top: 5px;">
+                  <span *ngIf="CustomerEmail.errors.required">Customer Email is Required</span>                 
+                </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Customer Address</label>
+            <input type="text" class="form-control" formControlName="customerAddress" 
+              data-toggle="tooltip" data-placement="right" title="Enter Customer Address">
+              <div class="alert alert-danger" *ngIf = "(CustomerAddress.touched) && (CustomerAddress.invalid)" 
+              style="margin-top: 5px;">
+                <span *ngIf="CustomerAddress.errors.required">Customer Address is Required</span>                 
+              </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="mobile">Customer Mobile</label>
+            <input type="text" class="form-control" formControlName="customerMobile" 
+              data-toggle="tooltip" data-placement="right" title="Enter Customer Mobile">
+              <div class="alert alert-danger" *ngIf = "(CustomerMobile.touched) && (CustomerMobile.invalid)" 
+              style="margin-top: 5px;">
+                <span *ngIf="CustomerMobile.errors.required">Customer Mobile is Required</span>
+                  <span *ngIf = "CustomerMobile.errors.required"> 
+                      Invalid Mobile Number 
+                  </span>                   
+              </div>
+        </div>
+
+        <div class="form-group">
+          <label for="username">User Name</label>
+          <input type="text" class="form-control" formControlName="userName" 
+            data-toggle="tooltip" data-placement="right" title="Enter User Name">
+            <div class="alert alert-danger" *ngIf = "(UserName.touched) && (UserName.invalid)" 
+            style="margin-top: 5px;">
+              <span *ngIf="UserName.errors.required">User Name is Required</span>
+                                 
+            </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="text" class="form-control" formControlName="password" 
+          data-toggle="tooltip" data-placement="right" title="Enter Password">
+          <div class="alert alert-danger" *ngIf = "(Password.touched) && (Password.invalid)" 
+          style="margin-top: 5px;">
+            <span *ngIf="Password.errors.required">Password is Required</span>
+                                 
+          </div>
+    </div>
+
+
+          <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+  </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+      <div [hidden]="!submitted">
+         <h4>Customer Added SuccessFully!</h4>
+         <button (click)="addCustomerForm()" class='btn btn-primary'>Add More Customer</button>
+      </div>      
+  </div>
+  <div class="col-sm-4"></div>
+</div>
