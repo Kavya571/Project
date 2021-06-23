@@ -11,7 +11,8 @@ import { CoupanComponent } from './components/coupan/coupan.component';
 const routes: Routes = [
   { path: 'view-pizza', component: PizzaComponent },
   { path: 'view-customer', component: CustomerComponent },
-   { path: 'view-pizzaOrder', component: PizzaOrderComponent },
+  { path: 'add-customer', component: AddCustomerComponent },
+  { path: 'view-pizzaOrder', component: PizzaOrderComponent },
   { path: 'view-coupan',component: CoupanComponent},
   { path: 'add-coupan', component: AddCoupanComponent }
 ];
