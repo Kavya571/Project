@@ -12,17 +12,6 @@ export class CustomerService {
   GET_CUSTOMER_PATH = '/viewCustomer';
   constructor(private http: HttpClient) { }
 
-  profile(id): Observable<any>{
-    return this.http.get(this.CUSTOMER_PATH + '/viewCustomer/'+id).pipe(map(
-      res => {
-        if (res) {
-          return res;
-        } else {
-          return {};
-        }
-      }
-    ));
-  }
 
   getCustomer(): Observable<any> {
 
