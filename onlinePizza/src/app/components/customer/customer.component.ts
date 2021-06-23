@@ -13,7 +13,6 @@ export class CustomerComponent implements OnInit {
   Customers: Observable<Customer[]>;
   Customer : Customer=new Customer();
   deleteMessage=false;
-  profileMessage=false;
 
   constructor(private CustomerService:CustomerService) { }
 
@@ -29,18 +28,7 @@ export class CustomerComponent implements OnInit {
     this.dtTrigger.next();
     })
   }
-  profile(id: number){
-    this.CustomerService.profile(id)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.profileMessage=true;
-        this.CustomerService.getCustomer().subscribe(data =>{
-          this.Customers =data
-          })
-      },
-      error => console.log(error));
-  }
+  
   delete(id: number) {
     this.CustomerService.delete(id)
       .subscribe(
